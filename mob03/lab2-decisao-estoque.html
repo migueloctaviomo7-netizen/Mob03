@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 2 - Decisão e Estoque</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background: #fdfaf6;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .box {
+            background: white;
+            border: 2px solid #fed7aa;
+            border-radius: 14px;
+            padding: 22px;
+            max-width: 320px;
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid #cbd5e1;
+            margin: 8px 0;
+            text-align: center;
+        }
+
+        button {
+            background: #fb90e0;
+            color: black;
+            border: none;
+            padding: 10px;
+            border-radius: 20px;
+            font-weight: bold;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .alerta {
+            margin-top: 14px;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .sucesso {
+            background: #dcfce7;
+            color: #15803d;
+            border: 1px solid #86efac;
+        }
+
+        .erro {
+            background: #fee2e2;
+            color: #b91c1c;
+            border: 1px solid #fca5a5;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <h3>🍕 churros Especial</h3>
+        <p>Estoque disponível: <strong style="color:#ea580c;">3 unidades</strong></p>
+
+        <label>Quantas churros deseja?</label>
+        <input type="number" id="qtd-pedido" value="2" min="1">
+
+        <button onclick="validarEstoque()">Comprar churros</button>
+
+        <div id="status-decisao" class="alerta sucesso">✅ Pedido aprovado!</div>
+    </div>
+
+    <script>
+        const estoqueMaximo = 20; // Limite fixo
+
+        function validarEstoque() {
+            let quantidadeDesejada = parseInt(document.getElementById('qtd-pedido').value) || 0;
+            let alerta = document.getElementById('status-decisao');
+
+            // TOMADA DE DECISÃO (ESTRUTURA SE / SENÃO)
+            if (quantidadeDesejada <= estoqueMaximo && quantidadeDesejada > 0) {
+                // Caminho Verdadeiro
+                alerta.className = "alerta sucesso";
+                alerta.innerText = "✅ Pedido aprovado! " + quantidadeDesejada + " unidade(s) reservada(s).";
+            } else {
+                // Caminho Falso
+                alerta.className = "alerta erro";
+                alerta.innerText = "❌ Estoque insuficiente! Só temos " + estoqueMaximo + " unidades.";
+            }
+        }
+    </script>
+</body>
+
+</html>

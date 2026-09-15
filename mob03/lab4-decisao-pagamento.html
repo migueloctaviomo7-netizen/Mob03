@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 4 - Decisão de Pagamento</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background: #f8fafc;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .box {
+            background: white;
+            border: 1px solid #cbd5e1;
+            border-radius: 14px;
+            padding: 20px;
+            max-width: 320px;
+            width: 100%;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 2px solid #f59e0b;
+            margin: 8px 0;
+            font-size: 0.95rem;
+        }
+
+        .status-box {
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 12px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .pix {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .cartao {
+            background: #fffbe8;
+            color: #0369a1;
+        }
+
+        .dinheiro {
+            background: #fffbe8;
+            color: #854d0e;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <h3>💳 Forma de Pagamento</h3>
+        <p>Total do Pedido: <strong>R$ 100,00</strong></p>
+
+        <label>Escolha como pagar:</label>
+        <select id="select-pagto" onchange="processarPagamento()">
+            <option value="pix">PIX (5% de Desconto Extra)</option>
+            <option value="cartao">Cartão de Crédito (Sem desconto)</option>
+            <option value="dinheiro">Dinheiro no Balcão</option>
+        </select>
+
+        <div id="resultado-pagto" class="status-box pix">
+            ⚡ Total no PIX: R$ 95,00 (5% OFF aplicado)
+        </div>
+    </div>
+
+    <script>
+        function processarPagamento() {
+            let totalOriginal = 100.00;
+            let opcao = document.getElementById('select-pagto').value;
+            let box = document.getElementById('resultado-pagto');
+
+            // DECISÃO COM MÚLTIPLAS OPÇÕES (IF / ELSE IF / ELSE)
+            if (opcao === "pix") {
+                let totalPix = totalOriginal * 0.95; // 5% de bônus
+                box.className = "status-box pix";
+                box.innerText = "⚡ Total no PIX: R$ " + totalPix.toFixed(2).replace('.', ',') + " (5% OFF)";
+            } else if (opcao === "cartao") {
+                box.className = "status-box cartao";
+                box.innerText = "💳 Total no Cartão: R$ " + totalOriginal.toFixed(2).replace('.', ',') + " (Até 3x s/ juros)";
+            } else {
+                box.className = "status-box dinheiro";
+                box.innerText = "💵 Total em Dinheiro: R$ " + totalOriginal.toFixed(2).replace('.', ',') + " (Levar troco)";
+            }
+        }
+    </script>
+</body>
+
+</html>

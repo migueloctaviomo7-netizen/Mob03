@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 1 - Entrada, Processo e Saída</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background: #f8fafc;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .card {
+            background: white;
+            border-radius: 14px;
+            padding: 20px;
+            max-width: 320px;
+            border: 1px solid #cbd5e1;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        input {
+            width: 80px;
+            padding: 8px;
+            font-size: 1rem;
+            text-align: center;
+            border-radius: 6px;
+            border: 1px solid #cbd5e1;
+        }
+
+        button {
+            background: #ea580c;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .saida {
+            margin-top: 15px;
+            font-size: 1.1rem;
+            color: #1e3a8a;
+            font-weight: bold;
+            background: #eff6ff;
+            padding: 10px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h2>🍔 Burger Angus</h2>
+        <p style="color:#16a34a; font-weight:bold;">Preço: R$ 32,00</p>
+
+        <!-- ENTRADA DE DADOS -->
+        <label>Quantidade desejada:</label><br><br>
+        <input type="number" id="qtd" value="2" min="1" max="20"><br>
+
+        <button onclick="processarPedido()">⚙️ Processar Pedido</button>
+
+        <!-- SAÍDA DE DADOS -->
+        <div class="saida" id="resultado-saida">Total: R$ 64,00</div>
+    </div>
+
+    <script>
+        function processarPedido() {
+            // 1. ENTRADA: Lê o valor do input (tipo inteiro/real)
+            let quantidade = parseFloat(document.getElementById('qtd').value) || 0;
+            const precoUnitario = 32.00; // Constante (tipo Real)
+
+            // 2. PROCESSAMENTO: Lógica matemática na memória
+            let subtotal = quantidade * precoUnitario;
+
+            // 3. SAÍDA: Atualiza o texto na tela do cliente
+            document.getElementById('resultado-saida').innerText = "Total: R$ " + subtotal.toFixed(2).replace('.', ',');
+        }
+    </script>
+</body>
+
+</html>

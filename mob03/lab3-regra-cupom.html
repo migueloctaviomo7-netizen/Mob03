@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 3 - Regra de Cupom</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background: #f8fafc;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #cbd5e1;
+            border-radius: 14px;
+            padding: 20px;
+            max-width: 320px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid #cbd5e1;
+            margin: 4px 0 10px 0;
+            text-transform: uppercase;
+        }
+
+        button {
+            background: #05e7ee;
+            color: rgb(240, 232, 232);
+            border: none;
+            padding: 10px;
+            border-radius: 20px;
+            font-weight: bold;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .resultado {
+            margin-top: 12px;
+            font-size: 0.95rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h3>🧾 Carrinho de Compras</h3>
+        <p>Subtotal: <strong>R$ 20,00</strong></p>
+
+        <label>Digite o Cupom (PROMO20):</label>
+        <input type="text" id="cupom-input" placeholder="Ex: PROMO20">
+
+        <button onclick="validarCupom()">Aplicar Cupom</button>
+
+        <div class="resultado" id="res-cupom" style="color:#64748b;">Nenhum cupom aplicado.</div>
+    </div>
+
+    <script>
+        function validarCupom() {
+            let subtotal = 20.00;
+            let cupomDigitado = document.getElementById('cupom-input').value.trim().toUpperCase();
+            let res = document.getElementById('res-cupom');
+
+            // REGRA LÓGICA COMPOSTA (SE código for PROMO20 E subtotal >= 30)
+            if (cupomDigitado === "PROMO20" && subtotal >= 30.00) {
+                let desconto = subtotal * 0.20; // 20% OFF (R$ 10,00)
+                let totalComDesconto = subtotal - desconto;
+                res.innerHTML = "<span style='color:green;'>✅ Cupom de 20% Aplicado! Total: R$ " + totalComDesconto.toFixed(2).replace('.', ',') + "</span>";
+            } else if (cupomDigitado === "") {
+                res.innerHTML = "<span style='color:orange;'>⚠️ Digite um código de cupom!</span>";
+            } else {
+                res.innerHTML = "<span style='color:red;'>❌ Cupom inválido ou valor mínimo de R$ 30 não atingido!</span>";
+            }
+        }
+    </script>
+</body>
+
+</html>
